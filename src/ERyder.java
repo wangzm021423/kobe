@@ -1,79 +1,52 @@
-public class ERyder {
-    // 
+
+    public static final String COMPANY_NAME = "ERyder";
+    public static final double BASE_FARE = 1.0;
+    public static final double PER_MINUTE_FARE = 0.5;
+
+    private final String LINKED_ACCOUNT;
+    private final String LINKED_PHONE_NUMBER;
+
     private String bikeID;
     private int batteryLevel;
     private boolean isAvailable;
     private double kmDriven;
 
-    // 
-    public ERyder() {
-        this.bikeID = "DEFAULT001";
-        this.batteryLevel = 50;
-        this.isAvailable = true;
-        this.kmDriven = 0.0;
-    }
-
-    // 
-    public ERyder(String bikeID, int batteryLevel, boolean isAvailable, double kmDriven) {
+    public ERyder(String bikeID, int batteryLevel, boolean isAvailable, double kmDriven, String account, String phone) {
         this.bikeID = bikeID;
-        setBatteryLevel(batteryLevel); // 使用setter进行合法性检查
+        this.batteryLevel = batteryLevel;
         this.isAvailable = isAvailable;
         this.kmDriven = kmDriven;
+        this.LINKED_ACCOUNT = account;
+        this.LINKED_PHONE_NUMBER = phone;
     }
 
-    // ride() 
-    public void ride() {
-        if (isAvailable && batteryLevel > 0) {
-            System.out.println("The bike is available for riding.");
-        } else {
-            System.out.println("The bike is not available.");
-        }
+    public ERyder(String account, String phone) {
+        this("DEFAULT001", 50, true, 0.0, account, phone);
     }
 
-    // printBikeDetails() 
-    public void printBikeDetails() {
-        System.out.println("Bike ID: " + bikeID);
-        System.out.println("Battery Level: " + batteryLevel + "%");
-        System.out.println("Availability: " + (isAvailable ? "Available" : "Not Available"));
-        System.out.println("Total Distance Driven: " + kmDriven + " km");
-        System.out.println("------------------------------");
+    public void printRideDetails(int usageInMinutes) {
+        System.out.println("Account: " + this.LINKED_ACCOUNT);
+        System.out.println("Phone: " + this.LINKED_PHONE_NUMBER);
+        System.out.println("Bike ID: " + this.bikeID);
+        System.out.println("Minutes: " + usageInMinutes);
+        System.out.println("Fare: $" + calculateFare(usageInMinutes));
     }
 
-    // 
-    public String getBikeID() {
-        return bikeID;
+    
+    private double calculateFare(int usageInMinutes) {
+        return BASE_FARE + (PER_MINUTE_FARE * usageInMinutes);
     }
 
-    public void setBikeID(String bikeID) {
-        this.bikeID = bikeID;
-    }
+    
+    public static void main(String[] args) {
+      
+        ERyder bike1 = new ERyder("BIKE001", 80, true, 10.0, "Alice", "123456");
+        bike1.printRideDetails(25);
 
-    public int getBatteryLevel() {
-        return batteryLevel;
-    }
+        System.out.println("--------");
 
-    public void setBatteryLevel(int batteryLevel) {
-        if (batteryLevel >= 0 && batteryLevel <= 100) {
-            this.batteryLevel = batteryLevel;
-        } else {
-            System.out.println("Error: Battery level must be between 0 and 100. Setting to default (50%).");
-            this.batteryLevel = 50;
-        }
-    }
-
-    public boolean isAvailable() {
-        return isAvailable;
-    }
-
-    public void setAvailable(boolean available) {
-        isAvailable = available;
-    }
-
-    public double getKmDriven() {
-        return kmDriven;
-    }
-
-    public void setKmDriven(double kmDriven) {
-        this.kmDriven = kmDriven;
+     
+        ERyder bike2 = new ERyder("Bob", "654321");
+        bike2.printRideDetails(10);
     }
 }
