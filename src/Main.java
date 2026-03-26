@@ -1,27 +1,25 @@
-public class Main{
+import java.util.Scanner;
+
+public class Main {
     public static void main(String[] args) {
         
-        MusicBox mbox = new MusicBox("S34TG65", 'Y', "Raindrops", "Misty", 
-        "The path less traveled", "Country", "BZEE Music", "Rhythm Divine");
+        System.out.println("======================================");
+        System.out.println("      ERyder User Management System    ");
+        System.out.println("======================================");
+        System.out.println("Starting the system... Please wait.");
+        System.out.println();
 
-        PlaySongs playsong = new PlaySongs();
-        
-        playsong.playSong(mbox.getSongID(), mbox.getPremiumSong(), 2);
+        AdminPanel adminPanel = new AdminPanel();
 
-        
-        // --- TODO
+        System.out.println("System started successfully!");
+        System.out.println("Opening Admin Panel...\n");
 
-        /* Repeat the above code to create another object  
-         * Pass different parameters to the MusicBox constructor, but initialise premiumSong to N and when calling the
-         * playSong method, pass ads parameter as just 1
-         * 
-         * 
-        */
-        
+        adminPanel.userManagementOptions();
 
+        System.out.println("\nThank you for using ERyder System!");
+        System.out.println("System closed.");
     }
 }
-
 
 
 
